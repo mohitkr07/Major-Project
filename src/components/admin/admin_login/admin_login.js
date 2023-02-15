@@ -38,7 +38,7 @@ let AdminLogin = () => {
     // console.log(data)
 
     if(data==true){
-      // navigate('/adminDashboard')
+      navigate('/adminDashboard')
     }else{
       setPassCheck(false);
       setTimeout(()=>{

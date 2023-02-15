@@ -89,3 +89,8 @@ html {
   color: #fcb366;
   /* align-self: flex-end; */
 }
+
+.top-reg {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+}

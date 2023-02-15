@@ -27,37 +27,43 @@ const FacultyReg = () => {
             <input
               className={FacultyCss.inp}
               type="text"
-              placeholder="Enter Contact Number"
+              placeholder="+91 XXXXXXXXXX"
             />
 
             <label className={FacultyCss.labl} for="gender">
               Gender:
             </label>
             <div className={FacultyCss.gen}>
-              <input class="gen male" type="radio" value="Male" name="gender" />{" "}
               <label for="">Male</label>
               <input
-                class="gen female"
+                className={FacultyCss.radio}
                 type="radio"
-                value="Female"
+                value="Male"
                 name="gender"
               />{" "}
               <label for="">Female</label>
               <input
-                class="gen other"
+                className={FacultyCss.radio}
+                type="radio"
+                value="Female"
+                name="gender"
+              />{" "}
+              <label for="">Other</label>
+              <input
+                className={FacultyCss.radio}
                 type="radio"
                 value="Other"
                 name="gender"
               />{" "}
-              <label for="">Other</label>
             </div>
+
             <label className={FacultyCss.labl} for="email">
               Email
             </label>
             <input
               className={FacultyCss.inp}
               type="email"
-              placeholder="Enter Email"
+              placeholder="xyz@iiitkota.ac.in"
             />
 
             <label className={FacultyCss.labl} for="Password">
@@ -66,7 +72,7 @@ const FacultyReg = () => {
             <input
               className={FacultyCss.inp}
               type="password"
-              placeholder="Enter Password"
+              placeholder="******"
             />
 
             <label className={FacultyCss.labl} for="conf-password">
@@ -75,7 +81,7 @@ const FacultyReg = () => {
             <input
               className={FacultyCss.inp}
               type="password"
-              placeholder="Confirm Password"
+              placeholder="******"
             />
 
             <button className={FacultyCss.btn}>Submit</button>

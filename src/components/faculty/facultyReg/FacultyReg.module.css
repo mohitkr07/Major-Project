@@ -29,6 +29,10 @@ html {
     font-weight: bold;
 }
 
+.nav span{
+    color: white;
+}
+
 .form {
     display: flex;
     flex-direction: column;
@@ -62,6 +66,7 @@ html {
 
     margin: 0.5rem 0 0.2rem 0;
     align-self: flex-start;
+    padding-left: 1rem;
 }
 
 .btn {
@@ -83,6 +88,7 @@ html {
 
 .gen {
     align-self: flex-start;
+    padding-left: 1rem;
 
 }
 
@@ -90,3 +96,9 @@ html {
     margin-top: 3rem;
     font-size: 1.5rem;
 }
+
+.radio{
+    margin-right: 1rem;
+    margin-left: 0.2rem;
+}
+

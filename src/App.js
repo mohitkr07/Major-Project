@@ -14,6 +14,7 @@ function App() {
           <Route exact path="/" element={<Main_page />} />
           <Route exact path="admin" element={<AdminLogin />} />
           <Route exact path="faculty" element={<FacultyLogin />} />
+          <Route exact path="adminDashboard" element={<Admin_dash />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

@@ -26,7 +26,7 @@ const FacultyReg = () => {
             </label>
             <input
               className={FacultyCss.inp}
-              type="text"
+              type="tel"
               placeholder="+91 XXXXXXXXXX"
             />
 

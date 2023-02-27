@@ -6,6 +6,7 @@ import Admin_dash from "./components/admin/admin_dash";
 import AdminLogin from "./components/admin/admin_login/admin_login";
 import FacultyLogin from "./components/faculty/facultyLogin/FacultyLogin";
 import FacultyReg from "./components/faculty/facultyReg/FacultyReg";
+import StudentDash from "./components/student_dashboard/StudentDash";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="faculty" element={<FacultyLogin />} />
           <Route exact path="adminDashboard" element={<Admin_dash />} />
           <Route exact path="facultyReg" element={<FacultyReg />} />
+          <Route exact path="studentdash" element={<StudentDash />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

@@ -1,20 +1,14 @@
 import React from "react";
-import './admin_dash.css';
+import './facultyDash.css';
 
-const Admin_dash = ()=>{
-
-    document.addEventListener("visibilitychange", () => {
-        // it could be either hidden or visible
-        document.title = document.visibilityState;  
-        console.log(document.visibilityState)  
-    });
+const Faculty_dash = ()=>{
 
     return (
         <div className="outter">
 
             <div className="navbar">
 
-                <a className="nav_text">Admin Panel</a>
+                <a className="nav_text">Faculty</a>
 
             </div>
             <div className="content">
@@ -25,7 +19,7 @@ const Admin_dash = ()=>{
                         Manage Students
                     </a>
                     <a href="/facultyReg">
-                        Register Faculty
+                        Add Courses
                     </a>
                 </div>
 
@@ -36,4 +30,4 @@ const Admin_dash = ()=>{
 
 }
 
-export default Admin_dash;
+export default Faculty_dash;

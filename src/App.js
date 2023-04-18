@@ -8,6 +8,7 @@ import FacultyLogin from "./components/faculty/facultyLogin/FacultyLogin";
 import FacultyReg from "./components/faculty/facultyReg/FacultyReg";
 import RegStudents from "./components/faculty/registerStudents/regStudents";
 import Faculty_dash from "./components/faculty/facultyDashboard/facultyDash";
+import AddQue from "./components/quiz/addQue"
 import QuizzForm from "./components/faculty/quizzForm/QuizzForm";
 
 function App() {
@@ -22,6 +23,8 @@ function App() {
           <Route exact path="facultyReg" element={<FacultyReg />} />
           <Route exact path="regStudents" element={<RegStudents />} />
           <Route exact path="facultyDash" element={<Faculty_dash />} />
+          <Route exact path="addQue" element={<AddQue />} />
+          <Route exact path="quizform" element={<QuizzForm/>}/>
           <Route exact path="quizzform" element={<QuizzForm />} />
         </Routes>
       </BrowserRouter>

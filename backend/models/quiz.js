@@ -13,6 +13,9 @@ const quizSchema = new mongoose.Schema({
     totalQues:{
         type: String,
     },
+    year: {
+        type: String,
+    },
     branch: {
         type: String,
     },
@@ -41,7 +44,11 @@ const quizSchema = new mongoose.Schema({
                 type: String
             }
         }
-    ]
+    ],
+    active: {
+        type: Boolean,
+        default: false
+    }
 
 })
 

@@ -25,6 +25,7 @@ function App() {
           <Route exact path="facultyDash" element={<Faculty_dash />} />
           <Route exact path="addQue" element={<AddQue />} />
           <Route exact path="quizform" element={<QuizzForm/>}/>
+          <Route exact path="quizzform" element={<QuizzForm />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

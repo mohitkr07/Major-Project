@@ -5,7 +5,6 @@ import './addQue.css'
 function QuizForm() {
 
   const url = window.location.search.split('=')[1]
-
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -13,7 +12,7 @@ function QuizForm() {
   }, []);
 
   const fetchData = async () => {
-    const res = await fetch(`http://localhost:5000/addQue/${url}`, {
+    const res = await fetch(`http://localhost:5000/getQuizInfo/${url}`, {
       method: "get",
       credentials: "include",
       headers: {
@@ -26,11 +25,32 @@ function QuizForm() {
     console.log(data)
   }
 
+
   const [quiz, setQuiz] = useState({
     questions: []
   });
 
-  const totalQuestions = 2;
+  const postData = async(e)=>{
+
+    e.preventDefault()
+
+    const res = await fetch(`http://localhost:5000/addQue/${url}`,{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(quiz)
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+
+  }
+
+
+  const totalQuestions = data.totalQues;
 
   const [newQuestion, setNewQuestion] = useState({
     questionId: "",
@@ -66,6 +86,10 @@ function QuizForm() {
       alert(`You cannot add more than ${totalQuestions} questions to the quiz.`);
     }
   };
+
+  function handleClick(){
+    console.log(quiz)
+  }
   
 
   return (
@@ -144,7 +168,9 @@ function QuizForm() {
           <p>Correct Answer: {question.correct}</p>
         </div>
       ))}
+      <button onClick={postData}>Done Adding Questions</button>
     </form>
+
   );
 }
 

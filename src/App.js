@@ -10,6 +10,7 @@ import RegStudents from "./components/faculty/registerStudents/regStudents";
 import Faculty_dash from "./components/faculty/facultyDashboard/facultyDash";
 import AddQue from "./components/quiz/addQue";
 import QuizzForm from "./components/faculty/quizzForm/QuizzForm";
+import InActiveQuiz from "./components/faculty/quizzForm/inActive";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route exact path="facultyDash" element={<Faculty_dash />} />
           <Route exact path="addQue" element={<AddQue />} />
           <Route exact path="quizzform" element={<QuizzForm />} />
+          <Route exact path="inactive" element={<InActiveQuiz />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

@@ -122,7 +122,6 @@ app.post("/quizzForm", async (req, res) => {
   // console.log(req.body);
 
   const quiz = new quizObj({
-    Id: mongodb.ObjectId,
     title: req.body.title,
     year: req.body.year,
     branch: req.body.branch,
@@ -135,6 +134,24 @@ app.post("/quizzForm", async (req, res) => {
 
   res.json("ok");
 });
+
+app.get('/inactive',async (req,res)=>{
+
+  const quiz = await quizObj.find()
+  console.log(quiz)
+
+  res.json(quiz)
+
+})
+app.get('/addQue/:data',async (req,res)=>{
+
+  // const quiz = await quizObj.find({})
+  // // console.log(quiz)
+  console.log(req.params.data)
+  res.json('done')
+
+})
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

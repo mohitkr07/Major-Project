@@ -13,6 +13,7 @@ import QuizzForm from "./components/faculty/quizzForm/QuizzForm";
 import InActiveQuiz from "./components/faculty/quizzForm/inActive";
 import QuizPage from "./components/student/quizPage";
 import StudentDash from "./components/student_dashboard/StudentDash";
+import StudentLogin from "./components/student/studentLogin";
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
           <Route exact path="addQue" element={<AddQue />} />
           <Route exact path="quizzform" element={<QuizzForm />} />
           <Route exact path="inactive" element={<InActiveQuiz />} />
-          <Route exact path="student" element={<StudentDash/>} />
+          <Route exact path="student" element={<StudentLogin/>} />
+          <Route exact path="studentDash" element={<StudentDash/>} />
         </Routes>
       </BrowserRouter>
     </Fragment>

@@ -11,6 +11,15 @@ const quizSchema = new mongoose.Schema({
     totalQues:{
         type: String,
     },
+    faculty:{
+        type: String,
+    },
+    course:{
+        type: String,
+    },
+    course_code:{
+        type: String,
+    },
     year: {
         type: String,
     },

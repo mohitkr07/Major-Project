@@ -20,7 +20,7 @@ const StudentDash = () => {
         <div class={StudentDashCss.options}>
           <button>Dashboard</button>
           <button>Courses</button>
-          <button>Quiz</button>
+          <button>Quiz </button>
         </div>
 
         <div class={StudentDashCss.dashboard}>

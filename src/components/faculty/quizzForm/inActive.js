@@ -46,6 +46,7 @@ const InActiveQuiz = () => {
               marks={quiz.marks}
             />
           ))}
+          
         </div>
       </div>
     </>

@@ -143,11 +143,21 @@ app.get('/inactive',async (req,res)=>{
   res.json(quiz)
 
 })
-app.get('/addQue/:data',async (req,res)=>{
+app.get('/getQuizInfo/:data',async (req,res)=>{
+  const id = req.params.data
+  const quiz = await quizObj.findOne({_id:id})
+  res.json(quiz)
 
-  // const quiz = await quizObj.find({})
-  // // console.log(quiz)
-  console.log(req.params.data)
+})
+app.post('/addQue/:data',async (req,res)=>{
+  const id = req.params.data
+  const quiz = await quizObj.findOne({_id:id})
+
+  console.log(req.body)
+
+  quiz.questions = req.body.questions
+  quiz.save()
+
   res.json('done')
 
 })

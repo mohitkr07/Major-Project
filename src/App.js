@@ -11,6 +11,7 @@ import Faculty_dash from "./components/faculty/facultyDashboard/facultyDash";
 import AddQue from "./components/quiz/addQue";
 import QuizzForm from "./components/faculty/quizzForm/QuizzForm";
 import InActiveQuiz from "./components/faculty/quizzForm/inActive";
+import QuizPage from "./components/student/quizPage";
 import StudentDash from "./components/student_dashboard/StudentDash";
 import StudentLogin from "./components/student/studentLogin";
 

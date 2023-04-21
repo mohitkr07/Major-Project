@@ -12,10 +12,12 @@ const cookieParser = require("cookie-parser");
 
 const facultyObj = require("./models/faculty");
 const quizObj = require("./models/quiz");
+const studentObj = require("./models/student");
 
 //Middleware authentication
 
 const facultyAuth = require("./middleware/facultyAuth");
+const studentAuth = require("./middleware/studentAuth")
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -46,10 +48,6 @@ db.once("open", () => {
   console.log("Connection Successful");
 });
 
-app.get("/setcookie", (req, res) => {
-  res.cookie("mycookie", "cookievalue");
-  res.send("Cookie set successfully");
-});
 
 app.get("/", (req, res) => {
   res.send("Abhishek chorotiya");
@@ -66,10 +64,30 @@ app.post("/adminLogin", (req, res) => {
   }
 });
 
-app.post("/regStudents", (req, res) => {
-  for (let val in req.body) {
-    console.log(req.body);
+app.post("/regStudents", async (req, res) => {
+  for (let i in req.body) {
+    const student = new studentObj({
+      Id : req.body[i].idnumber,
+      Name : req.body[i].name,
+      Father : req.body[i].fathersname,
+      Branch : req.body[i].branchname,
+      Semester : req.body[i].semester,
+      Contact : req.body[i].contact,
+      Email : req.body[i].idnumber + '@iiitkota.ac.in',
+      Gender : req.body[i].gender,
+      Password : req.body[i].contact
+    })
+    const data = await studentObj.findOne({ Id: req.body[i].idnumber });
+    if (data) {
+      console.log('Duplicate student entry')
+      continue
+    } else {
+      student.save()
+    }
+    // console.log(req.body[i]);
   }
+
+  res.json('done')
 });
 
 app.post("/regFaculty", async (req, res) => {
@@ -118,6 +136,28 @@ app.post("/facultyLogin", async (req, res) => {
     return res.send({ message: "error" });
   }
 });
+
+app.post("/studentLogin", async (req, res) => {
+  try {
+    const user = await studentObj.findByCredentials(
+      req.body.id,
+      req.body.password
+    );
+    const token = await user.generateAuthToken();
+    console.log(token);
+    res.cookie("student", token);
+    return res.send({ message: "LoggedIn" });
+
+  } catch (e) {
+    return res.send({ message: "error" });
+  }
+});
+
+app.post("/studentInfo", studentAuth,async (req, res) => {
+  res.json(req.user)
+});
+
+
 app.post("/quizzForm", async (req, res) => {
   // console.log(req.body);
 

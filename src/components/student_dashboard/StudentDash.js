@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import StudentDashCss from "./StudentDash.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const StudentDash = () => {
+
+  const [data,setData] = useState({
+    Name:'Loading...',
+    Father:'Loading...',
+    Gender : 'Loading...',
+    Contact : 'Loading...',
+    Branch : 'Loading...',
+    Id : 'Loading...',
+    Semester : 'Loading...',
+  });
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+
+  const fetchData = async()=>{
+
+    const res = await fetch('http://localhost:5000/studentInfo',{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      }
+    })
+
+    const data = await res.json()
+    setData(data)
+    console.log(data)
+  }
+
   return (
     <div class={StudentDashCss.container}>
       <div class={StudentDashCss.nav}>
@@ -13,7 +43,7 @@ const StudentDash = () => {
         <span id={(StudentDashCss.semHead, StudentDashCss.center)}>
           Current-Sem
         </span>
-        <span id={StudentDashCss.semHead}>VI</span>
+        <span id={StudentDashCss.semHead}>{data.Semester}</span>
       </div>
 
       <div class={StudentDashCss.front}>
@@ -34,10 +64,20 @@ const StudentDash = () => {
               <hr />
               <div class={StudentDashCss.profile2}>
                 <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  <span>Mohit Kumar</span>
+                  <span>Name : {data.Name.toUpperCase()}</span>
                 </div>
                 <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  2020KUEC2031
+                  ID : {data.Id.toUpperCase()}
+                </div>
+                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
+                  Father's Name : {data.Father.toUpperCase()}
+                </div>
+                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
+                  Branch : {data.Branch}
+                </div>
+                <br></br>
+                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
+                  Contact : {data.Contact}
                 </div>
               </div>
             </div>

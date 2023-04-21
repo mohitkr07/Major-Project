@@ -8,7 +8,7 @@ import FacultyLogin from "./components/faculty/facultyLogin/FacultyLogin";
 import FacultyReg from "./components/faculty/facultyReg/FacultyReg";
 import RegStudents from "./components/faculty/registerStudents/regStudents";
 import Faculty_dash from "./components/faculty/facultyDashboard/facultyDash";
-import AddQue from "./components/quiz/addQue"
+import AddQue from "./components/quiz/addQue";
 import QuizzForm from "./components/faculty/quizzForm/QuizzForm";
 import InActiveQuiz from "./components/faculty/quizzForm/inActive";
 import StudentDash from "./components/student_dashboard/StudentDash";

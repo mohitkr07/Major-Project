@@ -1,7 +1,31 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './addQue.css'
 
+
 function QuizForm() {
+
+  const url = window.location.search.split('=')[1]
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    const res = await fetch(`http://localhost:5000/addQue/${url}`, {
+      method: "get",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    setData(data);
+    console.log(data)
+  }
+
   const [quiz, setQuiz] = useState({
     questions: []
   });

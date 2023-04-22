@@ -11,18 +11,41 @@ const Card = (props) => {
 
   return (
     <>
-      <div style={{ border: "4px solid black", margin: "10px" }}>
-        <button className={classes.out_div} onClick={handleClick}>
-          <div className={classes.inner}>
+      {/* <div style={classes}>
             <a>{props.title}</a>
             <a>{props.faculty}</a>
             <a>{props.year}</a>
             <a>{props.branch}</a>
             <a>{props.duration}</a>
             <a>{props.marks}</a>
-          </div>
-        </button>
-      </div>
+      </div> */}
+      <tr>
+        <td>sno</td>
+        <td>{props.faculty}</td>
+        <td>{props.title}</td>
+        <td>{props.year}</td>
+        <td>{props.branch}</td>
+        <td>{props.tques}</td>
+        <td>{props.marks}</td>
+        <td>{props.duration}</td>
+        {/* <td>
+          <label className={classes.switch}>
+            <input
+              type="checkbox"
+              name="active"
+              checked={toggle}
+              onChange={handleChange}
+            />
+            <span className={classes.slider}></span>
+          </label>
+        </td> */}
+        <td>
+          <button className={classes.attemptButton}>Attempt</button>
+        </td>
+        {/* <td>
+          <button className={classes.deleteButton}>Delete</button>
+        </td> */}
+      </tr>
     </>
   );
 };

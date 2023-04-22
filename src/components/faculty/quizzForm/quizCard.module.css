@@ -1,27 +1,32 @@
 
+.inactive{
+    width: 100%;
+    
+}
 .out_div{
-    height: 150px;
-    width: 200px;
+    height: 1rem;
+    width: auto;
     /* border: 3px solid black; */
-    justify-content: center;
+    /* justify-content: center;
     display: flex;
     border: none;
     background-color: white;
-    align-items: center;
+    align-items: center; */
 }
 
-.inner{
+/* .inner{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     
-}
+} */
 
+/* Status Switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
-    margin-bottom: 25px;
+    width: 45px;
+    height: 18px;
+    /* margin-bottom: 25px; */
 }
 
 .switch input {
@@ -45,8 +50,8 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
+    height: 10px;
+    width: 10px;
     left: 4px;
     bottom: 4px;
     background-color: white;
@@ -66,4 +71,19 @@ input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
+}
+
+
+/* -------------------- */
+
+.editButton, .deleteButton{
+    width: 4rem;
+    height: 1.5rem;
+    border: none;
+    background-color:#295b84;
+    color: #fff;
+    cursor: pointer;
+}
+.editButton:hover, .deleteButton:hover{
+    background-color: #2196F3;
 }

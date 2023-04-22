@@ -29,10 +29,15 @@ let QuizPage = () => {
   }
 
   function handelClick(e){
-    console.log('clicked')
+    console.log(e.target.name)
     if(e.target.name=='next' && index<data.length-1) setIndex(index+1)
     if(e.target.name=='prev'&& index>0) setIndex(index-1)
 
+  }
+
+  function handelClick2(i){
+    // console.log(i)
+    setIndex(i-1)
   }
 
   return (
@@ -62,21 +67,15 @@ let QuizPage = () => {
           </div>
           <div class={styles.sidePanel}>
             <div className={styles.mapBox}>
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
-              <QueMap que="1" />
+
+              {
+                data.length
+                ?
+                data.map((a)=><QueMap que={a.questionId} key={a._id} click={handelClick2}></QueMap>)
+                :
+                'loading...'
+              }
+
             </div>
             <div>
               <button className={styles.submitQuiz}>Submit Quiz</button>

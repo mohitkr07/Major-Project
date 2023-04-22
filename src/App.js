@@ -30,8 +30,9 @@ function App() {
           <Route exact path="addQue" element={<AddQue />} />
           <Route exact path="quizzform" element={<QuizzForm />} />
           <Route exact path="inactive" element={<InActiveQuiz />} />
-          <Route exact path="student" element={<StudentLogin/>} />
-          <Route exact path="studentDash" element={<StudentDash/>} />
+          <Route exact path="student" element={<StudentLogin />} />
+          <Route exact path="studentDash" element={<StudentDash />} />
+          <Route exact path="quizPage" element={<QuizPage />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

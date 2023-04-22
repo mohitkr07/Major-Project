@@ -117,10 +117,10 @@ input{
 /* queMap card */
 .mapBox{
     min-width:25px;
+    align-self: flex-start;
     flex-wrap: wrap;
     height: auto;
     display: flex;
-    
     margin: 0.8rem;
 }
 .queMap{

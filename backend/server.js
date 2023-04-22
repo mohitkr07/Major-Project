@@ -17,7 +17,7 @@ const studentObj = require("./models/student");
 //Middleware authentication
 
 const facultyAuth = require("./middleware/facultyAuth");
-const studentAuth = require("./middleware/studentAuth")
+const studentAuth = require("./middleware/studentAuth");
 
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -48,7 +48,6 @@ db.once("open", () => {
   console.log("Connection Successful");
 });
 
-
 app.get("/", (req, res) => {
   res.send("Abhishek chorotiya");
 });
@@ -67,30 +66,30 @@ app.post("/adminLogin", (req, res) => {
 app.post("/regStudents", async (req, res) => {
   for (let i in req.body) {
     const student = new studentObj({
-      Id : req.body[i].idnumber,
-      Name : req.body[i].name,
-      Father : req.body[i].fathersname,
-      Branch : req.body[i].branchname,
-      Semester : req.body[i].semester,
-      Contact : req.body[i].contact,
-      Email : req.body[i].idnumber + '@iiitkota.ac.in',
-      Gender : req.body[i].gender,
-      Password : req.body[i].contact
-    })
+      Id: req.body[i].idnumber,
+      Name: req.body[i].name,
+      Father: req.body[i].fathersname,
+      Branch: req.body[i].branchname,
+      Semester: req.body[i].semester,
+      Contact: req.body[i].contact,
+      Email: req.body[i].idnumber + "@iiitkota.ac.in",
+      Gender: req.body[i].gender,
+      Password: req.body[i].contact,
+    });
     const data = await studentObj.findOne({ Id: req.body[i].idnumber });
     if (data) {
-      console.log('Duplicate student entry')
-      continue
+      console.log("Duplicate student entry");
+      continue;
     } else {
-      student.save()
+      student.save();
     }
     // console.log(req.body[i]);
   }
 
-  res.json('done')
+  res.json("done");
 });
 
-app.post("/regFaculty",async (req, res) => {
+app.post("/regFaculty", async (req, res) => {
   const faculty = new facultyObj({
     Id: "IIITK_" + uid(),
     Name: req.body.name,
@@ -147,19 +146,20 @@ app.post("/studentLogin", async (req, res) => {
     console.log(token);
     res.cookie("student", token);
     return res.send({ message: "LoggedIn" });
-
   } catch (e) {
     return res.send({ message: "error" });
   }
 });
 
-app.post("/studentInfo", studentAuth,async (req, res) => {
-  res.json(req.user)
+app.post("/studentInfo", studentAuth, async (req, res) => {
+  res.json(req.user);
 });
 
 
 app.post("/quizzForm",facultyAuth,async (req, res) => {
   console.log('Submitting Quiz form');
+app.post("/quizzForm", async (req, res) => {
+  console.log(req.body);
 
   const quiz = new quizObj({
     title: req.body.title,
@@ -176,44 +176,36 @@ app.post("/quizzForm",facultyAuth,async (req, res) => {
   res.json("ok");
 });
 
-app.get('/inactive',async (req,res)=>{
+app.get("/inactive", async (req, res) => {
+  const quiz = await quizObj.find();
+  res.json(quiz);
+});
+app.post("/setQuiz", async (req, res) => {
+  const quiz = await quizObj.findOne({ _id: req.body.id });
+  quiz.active = !req.body.toggle;
+  quiz.save();
+  res.json("done");
+});
 
-  const quiz = await quizObj.find()
-  res.json(quiz)
+app.get("/active", async (req, res) => {
+  const quiz = await quizObj.find({ active: true });
+  res.json(quiz);
+});
 
-})
-app.post('/setQuiz',async (req,res)=>{
+app.get("/getQuizInfo/:data", async (req, res) => {
+  const id = req.params.data;
+  const quiz = await quizObj.findOne({ _id: id });
+  res.json(quiz);
+});
+app.post("/addQue/:data", async (req, res) => {
+  const id = req.params.data;
+  const quiz = await quizObj.findOne({ _id: id });
 
-  const quiz = await quizObj.findOne({_id:req.body.id})
-  quiz.active = !req.body.toggle
-  quiz.save()
-  res.json('done')
-})
+  quiz.questions = req.body.questions;
+  quiz.save();
 
-app.get('/active',async (req,res)=>{
-
-  const quiz = await quizObj.find({active:true})
-  res.json(quiz)
-
-})
-
-
-app.get('/getQuizInfo/:data',async (req,res)=>{
-  const id = req.params.data
-  const quiz = await quizObj.findOne({_id:id})
-  res.json(quiz)
-
-})
-app.post('/addQue/:data',async (req,res)=>{
-  const id = req.params.data
-  const quiz = await quizObj.findOne({_id:id})
-
-  quiz.questions = req.body.questions
-  quiz.save()
-
-  res.json('done')
-
-})
+  res.json("done");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

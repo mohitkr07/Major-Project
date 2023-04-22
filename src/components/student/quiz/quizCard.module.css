@@ -2,7 +2,6 @@
 .out_div{
     height: 150px;
     width: 200px;
-    /* border: 3px solid black; */
     justify-content: center;
     display: flex;
     border: none;
@@ -75,4 +74,43 @@ input:checked+.slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+/* Quiz list */
+.QuizList {
+    width: 100%;
+    height: auto;
+    margin: 1rem;
+}
+
+.quizTable {
+    width: 100%;
+    height: auto;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.quizTable th {
+    height: 2rem;
+    background-color: rgb(18, 59, 94);
+    color: #fff;
+}
+
+.quizTable td {
+    border: 0.1rem solid grey;
+    height: 2rem;
+}
+
+.attemptButton {
+    width: 4rem;
+    height: 1.5rem;
+    border: none;
+    background-color: #295b84;
+    color: #fff;
+    cursor: pointer;
+}
+
+.attemptButton:hover {
+    background-color: #2196F3;
 }

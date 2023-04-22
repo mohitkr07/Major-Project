@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FacultyCss from "../facultyReg/FacultyReg.module.css";
 import Card from "./quizCard";
+import styles from "./Quizz.module.css";
 
 const InActiveQuiz = () => {
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ const InActiveQuiz = () => {
         });
         const jsonData = await res.json();
         setData(jsonData);
-        console.log(jsonData)
+        console.log(jsonData);
       } catch (err) {
         console.error(err);
       }
@@ -32,23 +33,38 @@ const InActiveQuiz = () => {
     <>
       <div className={FacultyCss.container}>
         <div className={FacultyCss.nav}>
-          <span>Quiz</span>
+          <span>Quiz List (Faculty & Admin access only)</span>
         </div>
-        <div>
-          {data.map((quiz) => (
-            <Card
-              key={quiz._id}
-              id={quiz._id}
-              title={quiz.title}
-              faculty="Mohit"
-              year={quiz.year}
-              branch={quiz.branch}
-              duration={quiz.duration}
-              marks={quiz.marks}
-              active={quiz.active}
-            />
-          ))}
-          
+        <div className={styles.QuizList}>
+          <table className={styles.quizTable}>
+            <tr>
+              <th>S No.</th>
+              <th>Created by</th>
+              <th>Title</th>
+              <th>Semester</th>
+              <th>Branch</th>
+              <th>Total Questions</th>
+              <th>Total Marks</th>
+              <th>Duration</th>
+              <th>Status</th>
+              <th>Edit Quiz</th>
+              <th>Delete</th>
+            </tr>
+            {data.map((quiz) => (
+              <Card
+                key={quiz._id}
+                id={quiz._id}
+                title={quiz.title}
+                faculty="Mohit"
+                year={quiz.year}
+                branch={quiz.branch}
+                duration={quiz.duration}
+                marks={quiz.marks}
+                active={quiz.active}
+                tques={quiz.totalQues}
+              />
+            ))}
+          </table>
         </div>
       </div>
     </>

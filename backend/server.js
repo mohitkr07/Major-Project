@@ -159,7 +159,7 @@ app.post("/studentInfo", studentAuth,async (req, res) => {
 
 
 app.post("/quizzForm",facultyAuth,async (req, res) => {
-  console.log(req.body);
+  console.log('Submitting Quiz form');
 
   const quiz = new quizObj({
     title: req.body.title,
@@ -168,7 +168,7 @@ app.post("/quizzForm",facultyAuth,async (req, res) => {
     totalQues: req.body.questionNo,
     duration: req.body.duration,
     marks: req.body.marks,
-    // faculty : req.user.name
+    faculty : req.user.Name
   });
 
   quiz.save();

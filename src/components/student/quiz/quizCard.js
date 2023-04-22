@@ -12,7 +12,7 @@ const Card = (props) => {
   return (
     <>
       <tr>
-        <td>sno</td>
+        <td>{props.sno}</td>
         <td>{props.faculty}</td>
         <td>{props.title}</td>
         <td>{props.year}</td>

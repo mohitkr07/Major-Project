@@ -158,8 +158,6 @@ app.post("/studentInfo", studentAuth, async (req, res) => {
 
 app.post("/quizzForm",facultyAuth,async (req, res) => {
   console.log('Submitting Quiz form');
-app.post("/quizzForm", async (req, res) => {
-  console.log(req.body);
 
   const quiz = new quizObj({
     title: req.body.title,

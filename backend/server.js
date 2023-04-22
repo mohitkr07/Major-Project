@@ -200,12 +200,6 @@ app.get('/active',async (req,res)=>{
 
 })
 
-app.get('/getQuiz',async (req,res)=>{
-
-  res.json('fetched quiz')
-
-})
-
 
 app.get('/getQuizInfo/:data',async (req,res)=>{
   const id = req.params.data

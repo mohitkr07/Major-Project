@@ -48,6 +48,7 @@ let QuizzForm = () => {
 
     const res = await fetch("http://localhost:5000/quizzForm", {
       method: "post",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },

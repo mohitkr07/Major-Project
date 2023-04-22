@@ -183,6 +183,24 @@ app.get('/inactive',async (req,res)=>{
   res.json(quiz)
 
 })
+app.post('/setQuiz',async (req,res)=>{
+
+  const quiz = await quizObj.findOne({_id:req.body.id})
+  quiz.active = !req.body.toggle
+  quiz.save()
+  res.json('done')
+})
+
+app.get('/active',async (req,res)=>{
+
+  const quiz = await quizObj.find({active:true})
+  console.log(quiz)
+
+  res.json(quiz)
+
+})
+
+
 app.get('/getQuizInfo/:data',async (req,res)=>{
   const id = req.params.data
   const quiz = await quizObj.findOne({_id:id})

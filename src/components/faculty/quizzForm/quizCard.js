@@ -57,7 +57,9 @@ const Card = (props) => {
           </label>
         </td>
         <td>
-          <button className={classes.editButton}>Edit</button>
+          <button className={classes.editButton} onClick={handleClick}>
+            Edit
+          </button>
         </td>
         <td>
           <button className={classes.deleteButton}>Delete</button>

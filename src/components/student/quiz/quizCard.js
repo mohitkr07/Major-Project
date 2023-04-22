@@ -11,14 +11,6 @@ const Card = (props) => {
 
   return (
     <>
-      {/* <div style={classes}>
-            <a>{props.title}</a>
-            <a>{props.faculty}</a>
-            <a>{props.year}</a>
-            <a>{props.branch}</a>
-            <a>{props.duration}</a>
-            <a>{props.marks}</a>
-      </div> */}
       <tr>
         <td>sno</td>
         <td>{props.faculty}</td>
@@ -40,7 +32,9 @@ const Card = (props) => {
           </label>
         </td> */}
         <td>
-          <button className={classes.attemptButton}>Attempt</button>
+          <button className={classes.attemptButton} onClick={handleClick}>
+            Attempt
+          </button>
         </td>
         {/* <td>
           <button className={classes.deleteButton}>Delete</button>

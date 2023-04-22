@@ -4,7 +4,7 @@ import Card from "./quizCard";
 import styles from "./quizCard.module.css";
 const ActiveQuiz = () => {
   const [data, setData] = useState([]);
-
+  var sno = 1
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,6 +51,7 @@ const ActiveQuiz = () => {
                 <Card
                   key={quiz._id}
                   id={quiz._id}
+                  sno={sno++}
                   title={quiz.title}
                   faculty="Mohit"
                   year={quiz.year}

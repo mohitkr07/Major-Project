@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import FacultyCss from "../facultyReg/FacultyReg.module.css";
+import FacultyCss from "../../faculty/facultyReg/FacultyReg.module.css";
 import Card from "./quizCard";
 
-const InActiveQuiz = () => {
+const ActiveQuiz = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/inactive", {
+        const res = await fetch("http://localhost:5000/active", {
           method: "get",
           credentials: "include",
           headers: {
@@ -17,7 +17,6 @@ const InActiveQuiz = () => {
         });
         const jsonData = await res.json();
         setData(jsonData);
-        console.log(jsonData)
       } catch (err) {
         console.error(err);
       }
@@ -45,7 +44,6 @@ const InActiveQuiz = () => {
               branch={quiz.branch}
               duration={quiz.duration}
               marks={quiz.marks}
-              active={quiz.active}
             />
           ))}
           
@@ -55,4 +53,4 @@ const InActiveQuiz = () => {
   );
 };
 
-export default InActiveQuiz;
+export default ActiveQuiz;

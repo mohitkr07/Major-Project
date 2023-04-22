@@ -5,6 +5,7 @@ import styles from "./Quizz.module.css";
 
 const InActiveQuiz = () => {
   const [data, setData] = useState([]);
+  var sno = 1
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,11 +52,13 @@ const InActiveQuiz = () => {
               <th>Delete</th>
             </tr>
             {data.map((quiz) => (
+              <>
               <Card
                 key={quiz._id}
+                sno={sno++}
                 id={quiz._id}
                 title={quiz.title}
-                faculty="Mohit"
+                faculty={quiz.faculty}
                 year={quiz.year}
                 branch={quiz.branch}
                 duration={quiz.duration}
@@ -63,6 +66,7 @@ const InActiveQuiz = () => {
                 active={quiz.active}
                 tques={quiz.totalQues}
               />
+              </>
             ))}
           </table>
         </div>

@@ -90,7 +90,7 @@ app.post("/regStudents", async (req, res) => {
   res.json('done')
 });
 
-app.post("/regFaculty", async (req, res) => {
+app.post("/regFaculty",async (req, res) => {
   const faculty = new facultyObj({
     Id: "IIITK_" + uid(),
     Name: req.body.name,
@@ -158,8 +158,8 @@ app.post("/studentInfo", studentAuth,async (req, res) => {
 });
 
 
-app.post("/quizzForm", async (req, res) => {
-  // console.log(req.body);
+app.post("/quizzForm",facultyAuth,async (req, res) => {
+  console.log(req.body);
 
   const quiz = new quizObj({
     title: req.body.title,
@@ -168,6 +168,7 @@ app.post("/quizzForm", async (req, res) => {
     totalQues: req.body.questionNo,
     duration: req.body.duration,
     marks: req.body.marks,
+    // faculty : req.user.name
   });
 
   quiz.save();
@@ -178,8 +179,6 @@ app.post("/quizzForm", async (req, res) => {
 app.get('/inactive',async (req,res)=>{
 
   const quiz = await quizObj.find()
-  console.log(quiz)
-
   res.json(quiz)
 
 })
@@ -194,8 +193,6 @@ app.post('/setQuiz',async (req,res)=>{
 app.get('/active',async (req,res)=>{
 
   const quiz = await quizObj.find({active:true})
-  console.log(quiz)
-
   res.json(quiz)
 
 })
@@ -210,8 +207,6 @@ app.get('/getQuizInfo/:data',async (req,res)=>{
 app.post('/addQue/:data',async (req,res)=>{
   const id = req.params.data
   const quiz = await quizObj.findOne({_id:id})
-
-  console.log(req.body)
 
   quiz.questions = req.body.questions
   quiz.save()

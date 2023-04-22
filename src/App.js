@@ -34,6 +34,7 @@ function App() {
           <Route exact path="student" element={<StudentLogin/>} />
           <Route exact path="studentDash" element={<StudentDash/>} />
           <Route exact path="active" element={<ActiveQuiz/>} />
+          <Route exact path="quiz" element={<QuizPage/>} />
         </Routes>
       </BrowserRouter>
     </Fragment>

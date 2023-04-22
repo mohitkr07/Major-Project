@@ -6,7 +6,7 @@ const Card = (props) => {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(`/addQue?id=${props.id}`);
+    navigate(`/quiz?id=${props.id}`);
   }
 
   return (

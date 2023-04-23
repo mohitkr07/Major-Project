@@ -152,7 +152,7 @@ app.post("/studentLogin", async (req, res) => {
 });
 
 app.post("/studentInfo", studentAuth, async (req, res) => {
-  res.json(req.user);
+  res.json(req.student);
 });
 
 
@@ -174,10 +174,11 @@ app.post("/quizzForm",facultyAuth,async (req, res) => {
   res.json("ok");
 });
 
-app.get("/inactive", async (req, res) => {
+app.get("/inactive",facultyAuth,async (req, res) => {
   const quiz = await quizObj.find();
   res.json(quiz);
 });
+
 app.post("/setQuiz", async (req, res) => {
   const quiz = await quizObj.findOne({ _id: req.body.id });
   quiz.active = !req.body.toggle;
@@ -185,7 +186,7 @@ app.post("/setQuiz", async (req, res) => {
   res.json("done");
 });
 
-app.get("/active", async (req, res) => {
+app.get("/active",studentAuth,async (req, res) => {
   const quiz = await quizObj.find({ active: true });
   res.json(quiz);
 });
@@ -195,6 +196,13 @@ app.get("/getQuizInfo/:data", async (req, res) => {
   const quiz = await quizObj.findOne({ _id: id });
   res.json(quiz);
 });
+
+app.get("/getQuiz/:data", async (req, res) => {
+  const id = req.params.data;
+  const quiz = await quizObj.findOne({ _id: id });
+  res.json(quiz);
+});
+
 app.post("/addQue/:data", async (req, res) => {
   const id = req.params.data;
   const quiz = await quizObj.findOne({ _id: id });

@@ -18,7 +18,7 @@ let QuizPage = () => {
 
   const fetchData = async()=>{
 
-    const res = await fetch(`http://localhost:5000/getQuizInfo/${url}`,{
+    const res = await fetch(`http://localhost:5000/getQuiz/${url}`,{
       method:'get',
       credentials: 'include',
       headers:{

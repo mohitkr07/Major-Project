@@ -8,17 +8,10 @@ const responseSchema = new mongoose.Schema({
     quizId: {
         type: String,
     },
-    response: [
-        {
-            questionId:{
-                type: String
-            },
-            option:{
-                type: String
-            }
-        }
-    ]
-    
+    response: {
+        type: Object,
+    }
+
 })
 
 

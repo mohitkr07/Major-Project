@@ -13,6 +13,7 @@ const cookieParser = require("cookie-parser");
 const facultyObj = require("./models/faculty");
 const quizObj = require("./models/quiz");
 const studentObj = require("./models/student");
+const responseObj = require("./models/responses");
 
 //Middleware authentication
 
@@ -155,9 +156,32 @@ app.post("/studentInfo", studentAuth, async (req, res) => {
   res.json(req.student);
 });
 
+app.post("/submitQuiz", studentAuth, async (req, res) => {
+  console.log(req.body.response);
+  console.log(req.body.id);
+  console.log(req.body.quizId);
 
-app.post("/quizzForm",facultyAuth,async (req, res) => {
-  console.log('Submitting Quiz form');
+  const check = await responseObj.findOne({
+    studentId: req.body.id,
+    quizId: req.body.quizId,
+  });
+  if (check) {
+    res.json("Student have already submitted the quiz!!");
+  } else {
+    const response = new responseObj({
+      studentId: req.body.id,
+      quizId: req.body.quizId,
+      response: req.body.response,
+    });
+
+    response.save();
+
+    res.json("done");
+  }
+});
+
+app.post("/quizzForm", facultyAuth, async (req, res) => {
+  console.log("Submitting Quiz form");
 
   const quiz = new quizObj({
     title: req.body.title,
@@ -166,7 +190,7 @@ app.post("/quizzForm",facultyAuth,async (req, res) => {
     totalQues: req.body.questionNo,
     duration: req.body.duration,
     marks: req.body.marks,
-    faculty : req.user.Name
+    faculty: req.user.Name,
   });
 
   quiz.save();
@@ -174,7 +198,7 @@ app.post("/quizzForm",facultyAuth,async (req, res) => {
   res.json("ok");
 });
 
-app.get("/inactive",facultyAuth,async (req, res) => {
+app.get("/inactive", facultyAuth, async (req, res) => {
   const quiz = await quizObj.find();
   res.json(quiz);
 });
@@ -186,7 +210,7 @@ app.post("/setQuiz", async (req, res) => {
   res.json("done");
 });
 
-app.get("/active",studentAuth,async (req, res) => {
+app.get("/active", studentAuth, async (req, res) => {
   const quiz = await quizObj.find({ active: true });
   res.json(quiz);
 });

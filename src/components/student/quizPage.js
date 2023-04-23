@@ -6,14 +6,17 @@ import QueMap from "./cards/queMap";
 
 let QuizPage = () => {
   const [data,setData] = useState([]);
+  const [student,setStudent] = useState({});
+  const [quizId,setQuizId] = useState('');
   var [index,setIndex] = useState(0);
-  const [res,setRes] = useState({});
+  const [input,setInput] = useState({});
   var option_indx = 1
 
   const url = window.location.search.split('=')[1]
 
     useEffect(()=>{
       fetchData()
+      fetchStudentData()
     },[])
 
   const fetchData = async()=>{
@@ -28,7 +31,23 @@ let QuizPage = () => {
 
     const datajson = await res.json()
     setData(datajson.questions)
+    setQuizId(datajson._id)
     // console.log(datajson.questions)
+  }
+
+  const fetchStudentData = async()=>{
+
+    const res = await fetch(`http://localhost:5000/studentInfo`,{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      }
+    })
+
+    const datajson = await res.json()
+    setStudent(datajson)
+    // console.log(datajson)
   }
 
   function handelClick(e){
@@ -46,9 +65,33 @@ let QuizPage = () => {
   function handelClick3(index,q){
 
     // console.log(index,que)
-    res[q] = index
-    setRes({...res})
-    console.log(res)
+    input[q] = index
+    setInput({...input})
+    console.log(input)
+
+  }
+
+  const postData = async(e)=>{
+
+    const res = await fetch('http://localhost:5000/submitQuiz',{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({response:input,id:student.Id,quizId})
+    })
+
+    const data = await res.json()
+
+    console.log(data)
+
+  }
+
+
+  function handleQuizSubmit(){
+
+    postData()
 
   }
 
@@ -68,7 +111,7 @@ let QuizPage = () => {
               />
               {
                 data.length?
-                data[index].options.map((a)=><Option select={res[data[index]._id]} index={option_indx++} que={data[index]._id} click={handelClick3} key={a._id} option={a.option}></Option>):'loading...'
+                data[index].options.map((a)=><Option select={input[data[index]._id]} index={option_indx++} que={data[index]._id} click={handelClick3} key={a._id} option={a.option}></Option>):'loading...'
               }
             </div>
 
@@ -90,7 +133,7 @@ let QuizPage = () => {
 
             </div>
             <div>
-              <button className={styles.submitQuiz}>Submit Quiz</button>
+              <button className={styles.submitQuiz} onClick={handleQuizSubmit}>Submit Quiz</button>
             </div>
           </div>
         </div>

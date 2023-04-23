@@ -1,37 +1,40 @@
 import React, { useEffect, useState } from "react";
 import StudentDashCss from "./StudentDash.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 
 const StudentDash = () => {
-
-  const [data,setData] = useState({
-    Name:'Loading...',
-    Father:'Loading...',
-    Gender : 'Loading...',
-    Contact : 'Loading...',
-    Branch : 'Loading...',
-    Id : 'Loading...',
-    Semester : 'Loading...',
+  const navigate = useNavigate();
+  function handleQuiz() {
+    navigate(`/active`);
+  }
+  const [data, setData] = useState({
+    Name: "Loading...",
+    Father: "Loading...",
+    Gender: "Loading...",
+    Contact: "Loading...",
+    Branch: "Loading...",
+    Id: "Loading...",
+    Semester: "Loading...",
   });
 
-  useEffect(()=>{
-    fetchData()
-  },[])
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const fetchData = async()=>{
+  const fetchData = async () => {
+    const res = await fetch("http://localhost:5000/studentInfo", {
+      method: "post",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-    const res = await fetch('http://localhost:5000/studentInfo',{
-      method:'post',
-      credentials: 'include',
-      headers:{
-        "Content-Type": "application/json"
-      }
-    })
-
-    const data = await res.json()
-    setData(data)
-    console.log(data)
-  }
+    const data = await res.json();
+    setData(data);
+    console.log(data);
+  };
 
   return (
     <div class={StudentDashCss.container}>
@@ -50,7 +53,7 @@ const StudentDash = () => {
         <div class={StudentDashCss.options}>
           <button>Dashboard</button>
           <button>Courses</button>
-          <button>Quiz </button>
+          <button onClick={handleQuiz}>Quiz </button>
         </div>
 
         <div class={StudentDashCss.dashboard}>

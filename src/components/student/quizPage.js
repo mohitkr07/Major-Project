@@ -3,9 +3,12 @@ import styles from "./QuizComp.module.css";
 import QuizComp from "./cards/quizComp";
 import Option from "./cards/option";
 import QueMap from "./cards/queMap";
+
 let QuizPage = () => {
   const [data,setData] = useState([]);
   var [index,setIndex] = useState(0);
+  const [res,setRes] = useState({});
+  var option_indx = 1
 
   const url = window.location.search.split('=')[1]
 
@@ -25,11 +28,11 @@ let QuizPage = () => {
 
     const datajson = await res.json()
     setData(datajson.questions)
-    console.log(datajson.questions)
+    // console.log(datajson.questions)
   }
 
   function handelClick(e){
-    console.log(e.target.name)
+    // console.log(e.target.name)
     if(e.target.name=='next' && index<data.length-1) setIndex(index+1)
     if(e.target.name=='prev'&& index>0) setIndex(index-1)
 
@@ -38,6 +41,15 @@ let QuizPage = () => {
   function handelClick2(i){
     // console.log(i)
     setIndex(i-1)
+  }
+
+  function handelClick3(index,q){
+
+    // console.log(index,que)
+    res[q] = index
+    setRes({...res})
+    console.log(res)
+
   }
 
   return (
@@ -56,7 +68,7 @@ let QuizPage = () => {
               />
               {
                 data.length?
-                data[index].options.map((a)=><Option key={a._id} option={a.option}></Option>):'loading...'
+                data[index].options.map((a)=><Option select={res[data[index]._id]} index={option_indx++} que={data[index]._id} click={handelClick3} key={a._id} option={a.option}></Option>):'loading...'
               }
             </div>
 

@@ -14,6 +14,7 @@ const facultyObj = require("./models/faculty");
 const quizObj = require("./models/quiz");
 const studentObj = require("./models/student");
 const responseObj = require("./models/responses");
+const resultsObj = require("./models/result");
 
 //Middleware authentication
 
@@ -156,29 +157,7 @@ app.post("/studentInfo", studentAuth, async (req, res) => {
   res.json(req.student);
 });
 
-app.post("/submitQuiz", studentAuth, async (req, res) => {
-  console.log(req.body.response);
-  console.log(req.body.id);
-  console.log(req.body.quizId);
 
-  const check = await responseObj.findOne({
-    studentId: req.body.id,
-    quizId: req.body.quizId,
-  });
-  if (check) {
-    res.json("Student have already submitted the quiz!!");
-  } else {
-    const response = new responseObj({
-      studentId: req.body.id,
-      quizId: req.body.quizId,
-      response: req.body.response,
-    });
-
-    response.save();
-
-    res.json("done");
-  }
-});
 
 app.post("/quizzForm", facultyAuth, async (req, res) => {
   console.log("Submitting Quiz form");
@@ -235,6 +214,62 @@ app.post("/addQue/:data", async (req, res) => {
   quiz.save();
 
   res.json("done");
+});
+
+app.get('/getResult',async (req,res)=>{
+  const student = "2020KUEC2033"
+  const quizId = "64441fdc065a18c561c6d8a3"
+
+  var quizData = await quizObj.findOne({_id:quizId})
+  
+  var responseData = await responseObj.findOne({studenId:student,quizId})
+
+  const response = responseData.response
+
+  var marks = 0
+
+  for(let que of quizData.questions){
+    if(response[que._id]){
+      if(response[que._id]==que.correct){
+        marks+=parseInt(que.mark)
+      }
+    }
+  }
+
+  const result = new resultsObj({
+    studentId : student,
+    quizId,
+    marks
+  })
+
+  result.save()
+
+  res.send(`${marks}`)
+})
+
+app.post("/submitQuiz", studentAuth, async (req, res) => {
+  // console.log(req.body.response);
+  // console.log(req.body.id);
+  // console.log(req.body.quizId);
+
+  const check = await responseObj.findOne({
+    studentId: req.body.id,
+    quizId: req.body.quizId,
+  });
+
+  if (check) {
+    res.json("Student has already submitted the quiz!!");
+  } else {
+    const response = new responseObj({
+      studentId: req.body.id,
+      quizId: req.body.quizId,
+      response: req.body.response,
+    });
+
+    response.save();
+
+    res.json("done");
+  }
 });
 
 const PORT = process.env.PORT || 5000;

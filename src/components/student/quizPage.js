@@ -3,6 +3,7 @@ import styles from "./QuizComp.module.css";
 import QuizComp from "./cards/quizComp";
 import Option from "./cards/option";
 import QueMap from "./cards/queMap";
+import { useNavigate } from "react-router-dom";
 
 let QuizPage = () => {
   const [data,setData] = useState([]);
@@ -11,10 +12,13 @@ let QuizPage = () => {
   var [index,setIndex] = useState(0);
   const [input,setInput] = useState({});
   var option_indx = 1
+  const [output,SetOut] = useState('')
+  const navigate = useNavigate();
+
 
   const url = window.location.search.split('=')[1]
 
-    useEffect(()=>{
+    useEffect( async ()=>{
       fetchData()
       fetchStudentData()
     },[])
@@ -83,16 +87,16 @@ let QuizPage = () => {
     })
 
     const data = await res.json()
-
+    SetOut(data)
     console.log(data)
 
   }
 
 
-  function handleQuizSubmit(){
-
-    postData()
-
+  async function handleQuizSubmit(){
+    if(window.confirm("Do you want to submit quiz now!!")){
+      await postData()
+    }
   }
 
   return (

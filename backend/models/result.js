@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const responseSchema = new mongoose.Schema({
+const resultsSchema = new mongoose.Schema({
 
     studentId : {
         type: String,
@@ -8,13 +8,13 @@ const responseSchema = new mongoose.Schema({
     quizId: {
         type: String,
     },
-    response: {
+    marks: {
         type: Object,
     }
 
 })
 
 
-const responseObj = mongoose.model('response',responseSchema)
+const resultsObj = mongoose.model('results',resultsSchema)
 
-module.exports = responseObj;
+module.exports = resultsObj;

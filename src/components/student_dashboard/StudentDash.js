@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import StudentDashCss from "./StudentDash.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
+import Dash from "./pages/Dashboard";
+import Test from "./pages/Test";
 const StudentDash = () => {
   const navigate = useNavigate();
   function handleQuiz() {
     navigate(`/active`);
   }
+
   const [data, setData] = useState({
     Name: "Loading...",
     Father: "Loading...",
@@ -37,55 +41,52 @@ const StudentDash = () => {
   };
 
   return (
-    <div class={StudentDashCss.container}>
-      <div class={StudentDashCss.nav}>
-        <span>STUDENT</span>
+    <div className={StudentDashCss.container}>
+      <div className={StudentDashCss.nav}>
+        <img src="pictures/LOGO.png" />
+        <span>STUDENT PANEL</span>
+
+        <div className={StudentDashCss.student_logout}>
+          <button
+            style={{
+              background: "white",
+              padding: "0.5rem",
+              borderRadius: "0.4rem",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faRightFromBracket}
+              size="2xl"
+              style={{ color: "#ffffff" }}
+            />
+          </button>
+        </div>
       </div>
 
-      <div class={StudentDashCss.semesterBox}>
+      <div className={StudentDashCss.semesterBox}>
         <span id={(StudentDashCss.semHead, StudentDashCss.center)}>
           Current-Sem
         </span>
         <span id={StudentDashCss.semHead}>{data.Semester}</span>
       </div>
 
-      <div class={StudentDashCss.front}>
-        <div class={StudentDashCss.options}>
+      <div className={StudentDashCss.front}>
+        <div className={StudentDashCss.options}>
           <button>Dashboard</button>
+          <button>Class Schedule</button>
+          <button>Attendance</button>
+          <button>Assignments</button>
+          <button>Academic Progress</button>
           <button>Courses</button>
-          <button onClick={handleQuiz}>Quiz </button>
+          <button>Study Material</button>
+          <button>Faculty Feedback</button>
+          <button>Student Feedback</button>
+          <button onClick={handleQuiz}>Quiz</button>
+          <button>Announcements</button>
+          <button>Academic Support</button>
         </div>
 
-        <div class={StudentDashCss.dashboard}>
-          <div class={StudentDashCss.studentInfo}>
-            <div class={StudentDashCss.profile}>
-              <div class={StudentDashCss.profile1}>
-                <div class={StudentDashCss.pic}>
-                  <FontAwesomeIcon icon="fa-4x fa-sharp fa-solid fa-user" />
-                </div>
-              </div>
-              <hr />
-              <div class={StudentDashCss.profile2}>
-                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  <span>Name : {data.Name.toUpperCase()}</span>
-                </div>
-                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  ID : {data.Id.toUpperCase()}
-                </div>
-                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  Father's Name : {data.Father.toUpperCase()}
-                </div>
-                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  Branch : {data.Branch}
-                </div>
-                <br></br>
-                <div class={(StudentDashCss.stId, StudentDashCss.infoBox)}>
-                  Contact : {data.Contact}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        {Dash()}
       </div>
     </div>
   );

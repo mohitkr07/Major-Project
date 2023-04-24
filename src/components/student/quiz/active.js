@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FacultyCss from "../../faculty/facultyReg/FacultyReg.module.css";
 import Card from "./quizCard";
 import styles from "./quizCard.module.css";
+
 const ActiveQuiz = () => {
   const [data, setData] = useState([]);
   var sno = 1;

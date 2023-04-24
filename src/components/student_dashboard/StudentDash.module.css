@@ -28,8 +28,8 @@ html {
 /* semester-box */
 .semesterBox {
     position: absolute;
-    top: 7rem;
-    right: 1rem;
+    top: 1.5rem;
+    right: 8rem;
     height: 3rem;
     width: 7rem;
     border: solid #172a4d 0.1rem;
@@ -37,7 +37,7 @@ html {
 
     display: flex;
     flex-direction: column;
-    
+    background-color: #fff;
 }
 
 .semesterBox span {
@@ -49,12 +49,18 @@ html {
     justify-content: center;
 }
 
+.student_logout{
+    justify-self: right;
+    position: absolute;
+    margin: 3rem;
+}
+
 /* --------------- */
 .nav {
     width: 100%;
     height: 6rem;
     background: linear-gradient(90deg, #172a4d 0%, rgba(25, 26, 77, 1) 100%);
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     color: #fff;
@@ -64,12 +70,24 @@ html {
 }
 .nav span{
     color: #fff;
+    justify-self: center;
+    align-self: center;
+    position: absolute;
+}
+
+/* logo */
+.nav img{
+    height: 6.5rem;
+    position: absolute;
+    margin-left: 4rem;
+    margin-top: 2rem;
 }
 
 .front {
     display: flex;
     height: calc(100% - 6rem);
     width: 100%;
+    align-items: center;
 }
 
 .options {
@@ -77,8 +95,10 @@ html {
     flex-direction: column;
     width: 18rem;
     align-items: center;
-    border-right: solid #172a4d 0.11rem;
-
+    justify-content: center;
+    border-right: solid #19214d 0.11rem;
+    height: 100%;
+    background-color: #172a4d;
 }
 
 .options button {
@@ -88,13 +108,15 @@ html {
     width: 92%;
     height: 2.5rem;
     border: none;
-    margin: 0.3rem 0 0 0;
+    margin: 0.6rem 0 0 0;
     cursor: pointer;
     text-decoration: none;
     outline: none;
     background: none;
     border: solid grey 0.1rem;
     border-radius: 0.2rem;
+    background: white;
+    border-color: white;
 }
 
 .options button:hover {
@@ -106,6 +128,9 @@ html {
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    
 }
 
 /* --------------profile---------- */
@@ -117,9 +142,18 @@ html {
     justify-content: center;
     width: 30rem;
     height: 90%;
+    border-radius: 0.2rem;
     align-self: center;
     margin-left: 2.5rem;
-    border: solid #172a4d 0.11rem;
+    border: solid #19214d 0.1rem;
+
+}
+
+.statistics {
+    width: calc(100% - 35rem);
+    height: 90%;
+    /* background-color: red; */
+    border: 1px solid black;
 }
 
 hr {
@@ -150,18 +184,35 @@ hr {
 .pic {
     width: 8rem;
     height: 8rem;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    
+}
+.font_awesome{
+    height: 90%;
+    width: 90%;
 }
 
 .profile2 {
-    width: 100%;
-    height: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    width: 80%;
+    height: 60%;
+   
+}
+.profile_table{
+    height: 60%;
+    margin-top: 1rem;
+
+}
+.profile_table tr td{
+    text-align: left;
+    padding-left: 1rem;    
+}
+
+.leftcell{
+    background-color: #19214d;
+    color: #fff;
+}
+.rightcell{
+    background-color: #e9ecf0;
+    
 }
 
 .infoBox {

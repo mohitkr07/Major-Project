@@ -15,6 +15,7 @@ const quizObj = require("./models/quiz");
 const studentObj = require("./models/student");
 const responseObj = require("./models/responses");
 const resultsObj = require("./models/result");
+const courseObj = require("./models/courses");
 
 //Middleware authentication
 
@@ -217,8 +218,8 @@ app.post("/addQue/:data", async (req, res) => {
 });
 
 app.get('/getResult',async (req,res)=>{
-  const student = "2020KUEC2033"
-  const quizId = "64441fdc065a18c561c6d8a3"
+  const student = "2020KUEC2029"
+  const quizId = "6448e29f6849b1d6b7a65670"
 
   var quizData = await quizObj.findOne({_id:quizId})
   
@@ -271,6 +272,32 @@ app.post("/submitQuiz", studentAuth, async (req, res) => {
     res.json("done");
   }
 });
+
+app.post('/addCourse',async (req,res)=>{
+
+  const CourseId = req.body.courseId
+  const CourseName = req.body.courseName
+  const CourseCredit = req.body.courseCredit
+  const Semester = req.body.semester
+  const FacultyId = req.body.facultyId
+
+  const check = await courseObj.findOne({
+    CourseId
+  });
+
+  if(!check){
+    const course = new courseObj({
+      CourseId,CourseName,CourseCredit,Semester,FacultyId
+    });
+  
+    await course.save()
+  
+    res.json('Course Added Successfully!')
+  }else{
+    res.json('Course Already Exists !')
+  }
+
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

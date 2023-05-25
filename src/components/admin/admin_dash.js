@@ -2,11 +2,7 @@ import React from "react";
 import "./admin_dash.css";
 
 const Admin_dash = () => {
-  document.addEventListener("visibilitychange", () => {
-    // it could be either hidden or visible
-    document.title = document.visibilityState;
-    console.log(document.visibilityState);
-  });
+
 
   return (
     <div className="outter">

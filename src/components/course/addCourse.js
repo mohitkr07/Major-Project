@@ -54,7 +54,7 @@ let AddCourse = () => {
 
     const data = await res.json();
     console.log(data);
-    alert(data.msg);
+    alert(data);
   };
   return (
     <>

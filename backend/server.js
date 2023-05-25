@@ -15,6 +15,7 @@ const quizObj = require("./models/quiz");
 const studentObj = require("./models/student");
 const responseObj = require("./models/responses");
 const resultsObj = require("./models/result");
+const courseObj = require("./models/courses");
 
 //Middleware authentication
 
@@ -157,8 +158,6 @@ app.post("/studentInfo", studentAuth, async (req, res) => {
   res.json(req.student);
 });
 
-
-
 app.post("/quizzForm", facultyAuth, async (req, res) => {
   console.log("Submitting Quiz form");
 
@@ -216,36 +215,36 @@ app.post("/addQue/:data", async (req, res) => {
   res.json("done");
 });
 
-app.get('/getResult',async (req,res)=>{
-  const student = "2020KUEC2033"
-  const quizId = "6446f9fc28a0f5a36ee75feb";
+app.get("/getResult", async (req, res) => {
+  const student = "2020KUEC2029";
+  const quizId = "6448e29f6849b1d6b7a65670";
 
-  var quizData = await quizObj.findOne({_id:quizId})
-  
-  var responseData = await responseObj.findOne({studenId:student,quizId})
+  var quizData = await quizObj.findOne({ _id: quizId });
 
-  const response = responseData.response
+  var responseData = await responseObj.findOne({ studenId: student, quizId });
 
-  var marks = 0
+  const response = responseData.response;
 
-  for(let que of quizData.questions){
-    if(response[que._id]){
-      if(response[que._id]==que.correct){
-        marks+=parseInt(que.mark)
+  var marks = 0;
+
+  for (let que of quizData.questions) {
+    if (response[que._id]) {
+      if (response[que._id] == que.correct) {
+        marks += parseInt(que.mark);
       }
     }
   }
 
   const result = new resultsObj({
-    studentId : student,
+    studentId: student,
     quizId,
-    marks
-  })
+    marks,
+  });
 
-  result.save()
+  result.save();
 
-  res.send(`${marks}`)
-})
+  res.send(`${marks}`);
+});
 
 app.post("/submitQuiz", studentAuth, async (req, res) => {
   // console.log(req.body.response);
@@ -269,6 +268,36 @@ app.post("/submitQuiz", studentAuth, async (req, res) => {
     response.save();
 
     res.json("done");
+  }
+});
+
+app.post("/addCourse", async (req, res) => {
+  const CourseId = req.body.courseId;
+  const CourseName = req.body.courseName;
+  const CourseCredit = req.body.courseCredit;
+  const Semester = req.body.semester;
+  const Branch = req.body.branch;
+  const FacultyId = req.body.facultyId;
+
+  const check = await courseObj.findOne({
+    CourseId,
+  });
+
+  if (!check) {
+    const course = new courseObj({
+      CourseId,
+      CourseName,
+      CourseCredit,
+      Semester,
+      FacultyId,
+      Branch,
+    });
+
+    await course.save();
+
+    res.json("Course Added Successfully!");
+  } else {
+    res.json("Course Already Exists !");
   }
 });
 

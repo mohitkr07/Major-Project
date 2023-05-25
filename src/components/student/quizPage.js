@@ -15,6 +15,12 @@ let QuizPage = () => {
   const [output,SetOut] = useState('')
   const navigate = useNavigate();
 
+  document.addEventListener("visibilitychange", () => {
+    document.title = document.visibilityState=='hidden'?'cheating':'Quiz';
+    if(document.visibilityState=='hidden') window.alert('Your activity is being Monitered !!')  
+    console.log(document.visibilityState)  
+});
+
 
   const url = window.location.search.split('=')[1]
 

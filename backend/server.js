@@ -218,7 +218,7 @@ app.post("/addQue/:data", async (req, res) => {
 
 app.get('/getResult',async (req,res)=>{
   const student = "2020KUEC2033"
-  const quizId = "64441fdc065a18c561c6d8a3"
+  const quizId = "6446f9fc28a0f5a36ee75feb";
 
   var quizData = await quizObj.findOne({_id:quizId})
   

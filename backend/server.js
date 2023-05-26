@@ -158,6 +158,16 @@ app.post("/studentInfo", studentAuth, async (req, res) => {
   res.json(req.student);
 });
 
+app.post('/getFaculty',facultyAuth,async (req,res)=>{
+
+  if(req.user){
+    res.json(req.user)
+  }else{
+    res.json('No faculty logged in...')
+  }
+
+})
+
 app.post("/quizzForm", facultyAuth, async (req, res) => {
   console.log("Submitting Quiz form");
 
@@ -300,6 +310,21 @@ app.post("/addCourse", async (req, res) => {
     res.json("Course Already Exists !");
   }
 });
+
+app.post('/courses/:data',async (req,res)=>{
+  const faculty = req.params.data
+  const courses = await courseObj.find({FacultyId:faculty})
+  console.log(faculty,'hi')
+  res.json(courses)
+})
+
+app.get('/attendence/:course',async (req,res)=>{
+
+  const students = await studentObj.find();
+  const data = students.filter((a)=>a.Branch=='Electronics and Communication Engineering')
+  console.log(data)
+
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -21,13 +21,13 @@ const studentSchema = new mongoose.Schema({
         type: String,
     },
     Password: {
-        type: String
+        type: String,
     },
     Semester: {
-        type: String
+        type: String,
     },
     Branch: {
-        type: String
+        type: String,
     },
     Courses: [
         {

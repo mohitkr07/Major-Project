@@ -1,7 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./courseCard";
 import Styles from "./attendance.module.css";
 let ManageAttendance = () => {
+
+  const [course,setCourse] = useState([]);
+
+  useEffect(()=>{
+    getCourses();
+  },[])
+
+  async function getCourses(){
+
+    const ress = await fetch('http://localhost:5000/getFaculty',{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      },
+    })
+
+    const data1 = await ress.json()
+
+    const res = await fetch(`http://localhost:5000/courses/${await data1.Id}`,{
+      method:'post',
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json"
+      },
+    })
+
+    const data = await res.json()
+    setCourse(data)
+    console.log(data)
+
+  }
+
+
   return (
     <div className="outter">
       <div className="navbar">
@@ -9,8 +43,13 @@ let ManageAttendance = () => {
       </div>
       <div className="content">
         <div className={Styles.attendanceBox}>
-          <Card courseid="1" coursename="xyz" semester="6" branch="ece" />
-          <Card courseid="1" coursename="xyz" semester="6" branch="ece" />
+
+        {
+          course.map((a)=><Card courseid={a.CourseId} coursename={a.CourseName} semester={a.semester} branch={a.Branch} />)
+        }
+
+          {/* <Card courseid="1" coursename="xyz" semester="6" branch="ece" />
+          <Card courseid="1" coursename="xyz" semester="6" branch="ece" /> */}
         </div>
       </div>
     </div>

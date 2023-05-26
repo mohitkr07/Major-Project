@@ -314,8 +314,7 @@ app.post("/addCourse", async (req, res) => {
 app.post('/courses/:data',async (req,res)=>{
   const faculty = req.params.data
   const courses = await courseObj.find({FacultyId:faculty})
-
-  console.log(courses)
+  console.log(faculty,'hi')
   res.json(courses)
 })
 

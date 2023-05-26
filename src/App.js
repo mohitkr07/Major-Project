@@ -17,6 +17,7 @@ import StudentLogin from "./components/student/studentLogin";
 import ActiveQuiz from "./components/student/quiz/active";
 import AddCourse from "./components/course/addCourse";
 import ManageAttendance from "./components/faculty/attendance/manageAttendance";
+import TakeAttendance from "./components/faculty/attendance/takeAttendance";
 
 function App() {
   return (
@@ -40,6 +41,11 @@ function App() {
           <Route exact path="quiz" element={<QuizPage />} />
           <Route exact path="addcourse" element={<AddCourse />} />
           <Route exact path="manageattendance" element={<ManageAttendance />} />
+          <Route
+            exact
+            path="manageattendance/takeattendance"
+            element={<TakeAttendance />}
+          />
         </Routes>
       </BrowserRouter>
     </Fragment>

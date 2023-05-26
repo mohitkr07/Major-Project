@@ -1,6 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Styles from "./attendance.module.css";
 let CourseCard = (props) => {
+  let navigate = useNavigate();
+  const moveto = () => {
+    let path = "takeattendance";
+    navigate(path);
+  };
   return (
     <>
       <div className={Styles.card}>
@@ -8,7 +14,7 @@ let CourseCard = (props) => {
         <p>{props.coursename}</p>
         <p>{props.semester}</p>
         <p>{props.branch}</p>
-        <button>view</button>
+        <button onClick={moveto}>view</button>
       </div>
     </>
   );

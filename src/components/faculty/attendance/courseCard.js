@@ -4,7 +4,7 @@ import Styles from "./attendance.module.css";
 let CourseCard = (props) => {
   let navigate = useNavigate();
   const moveto = () => {
-    let path = "takeattendance";
+    let path = `takeattendance?branch=${props.branch}`;
     navigate(path);
   };
   return (

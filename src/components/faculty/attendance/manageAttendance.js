@@ -43,13 +43,9 @@ let ManageAttendance = () => {
       </div>
       <div className="content">
         <div className={Styles.attendanceBox}>
-
         {
-          course.map((a)=><Card courseid={a.CourseId} coursename={a.CourseName} semester={a.semester} branch={a.Branch} />)
+          course.map((a)=><Card key={a.CourseId} courseid={a.CourseId} coursename={a.CourseName} semester={a.semester} branch={a.Branch} />)
         }
-
-          {/* <Card courseid="1" coursename="xyz" semester="6" branch="ece" />
-          <Card courseid="1" coursename="xyz" semester="6" branch="ece" /> */}
         </div>
       </div>
     </div>

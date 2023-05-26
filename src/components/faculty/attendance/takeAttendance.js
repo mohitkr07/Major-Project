@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Styles from "./attendance.module.css";
 
 let TakeAttendance = () => {
+  const branch = window.location.search.split("=")[1];
+
+  const [students, setStudents] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function getData() {
+    const res = await fetch(`http://localhost:5000/attendence/${branch}`, {
+      method: "post",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json();
+    setStudents(data);
+    console.log(data);
+  }
+
+  var i = 1;
+
   return (
     <div className="outter">
       <div className="navbar">
@@ -16,30 +40,16 @@ let TakeAttendance = () => {
               <th>ID</th>
               <th>Attendance</th>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Mohit</td>
-              <td>2020KUEC2031</td>
-              <td>
-                <input type="checkbox"></input>
-              </td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Abhishek</td>
-              <td>2020KUEC2033</td>
-              <td>
-                <input type="checkbox"></input>
-              </td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Kundan</td>
-              <td>2020KUEC2029</td>
-              <td>
-                <input type="checkbox"></input>
-              </td>
-            </tr>
+            {students.map((a) => (
+              <tr>
+                <td>{i++}</td>
+                <td>{a.Name}</td>
+                <td>{a.Id}</td>
+                <td>
+                  <input type="checkbox"></input>
+                </td>
+              </tr>
+            ))}
           </table>
         </div>
       </div>

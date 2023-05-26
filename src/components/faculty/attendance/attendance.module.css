@@ -1,0 +1,19 @@
+.card{
+    display: flex;
+    flex-direction: column;
+    height:fit-content;
+    width: 6rem;
+    padding: 3px;
+    border: 1px solid black;
+    background-color: rgb(222, 238, 252);
+    margin: 3px;
+}
+.card button{
+    cursor: pointer;
+}
+.attendanceBox{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 6px;
+}
